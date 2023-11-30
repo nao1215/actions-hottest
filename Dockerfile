@@ -1,6 +1,12 @@
-FROM golang:1.21.4-alpine3.17
+FROM golang:1.21.4-bookworm
 
-RUN apk add --no-cache git
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    wget \
+    unzip \
+    vim \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
