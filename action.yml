@@ -8,9 +8,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: 'Install hottest'
-      uses: 'shell'
-      run: go install github.com/nao1215/hottest@latest
-    - name: 'Run hottest'
-      uses: 'shell'
-      run: hottest ${{ inputs.args }}
+    - run: bash $GITHUB_ACTION_PATH/entrypoint.sh ${{ inputs.args }}
+      shell: bash
+      env:
+        GITHUB_ACTION_PATH: ${{ github.action_path }}
