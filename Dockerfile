@@ -1,11 +1,6 @@
-FROM ubuntu:latest
+FROM golang:1.21.4-alpine3.18
 
-RUN apt-get update && \
-    apt-get install -y \
-    git \
-    wget \
-    unzip \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache git
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
