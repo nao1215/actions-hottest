@@ -23,6 +23,7 @@ runs:
       with:
         issue-number: ${{ github.event.number }}
         body-includes: "## HOTTEST report"
+      continue-on-error: true
 
     - name: Delete existing comment
       shell: bash
