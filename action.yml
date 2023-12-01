@@ -15,6 +15,7 @@ runs:
       shell: bash
       env:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
+      continue-on-error: true
 
     - name: Find existing comment
       id: find_comment
@@ -39,3 +40,11 @@ runs:
         token: ${{ inputs.github_token }}
         issue-number: ${{ github.event.number }}
         body-path: 'hottest_report.md'
+
+    - name: Check for Error Messages
+      shell: bash
+      run: |
+        if grep -q "## Error Messages" hottest_report.md; then
+          echo "Error Messages found. Exiting with an error."
+          exit 1
+        fi
