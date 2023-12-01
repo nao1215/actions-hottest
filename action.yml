@@ -5,6 +5,9 @@ inputs:
   args:
     description: 'Arguments to pass to hottest command'
     required: true
+  github_token:
+    description: "set secrets.GITHUB_TOKEN or github.token"
+    default: "${{ github.token }}"
 runs:
   using: 'composite'
   steps:
@@ -26,13 +29,13 @@ runs:
       run: |
         curl \
           -X DELETE \
-          -H "Authorization: token $GITHUB_TOKEN" \
+          -H "Authorization: token ${{ inputs.github_token }} \
           -H "Accept: application/vnd.github+json" \
           "https://api.github.com/repos/${{ github.repository }}/issues/comments/${{ steps.find_comment.outputs.comment-id }}"
 
     - name: Comment coverage on PR
       uses: peter-evans/create-or-update-comment@v3
       with:
-        token: $GITHUB_TOKEN
+        token: ${{ inputs.github_token }}
         issue-number: ${{ github.event.number }}
         body-path: 'hottest_report.md'
