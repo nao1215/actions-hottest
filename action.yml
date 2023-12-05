@@ -15,7 +15,7 @@ runs:
       uses: actions/checkout@v4
 
     - name: Install Hottest
-      uses: shell
+      shell: bash
       run: |
         go install github.com/nao1215/hottest@latest
 
