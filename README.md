@@ -39,6 +39,10 @@ jobs:
           args: '-cover -coverpkg=./... -coverprofile=coverage.out ./...'
 ```
 
+> [!IMPORTANT]  
+> Please remember to include 'go mod download' in the workflow. If you forget, the hottest command may experience long waiting times when running tests, and the tests may not complete.
+
+
 ### Result
 The old PR comments created by `hottest` will be deleted when creating a new PR comment.
 #### Success case
