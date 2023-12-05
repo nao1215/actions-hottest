@@ -11,6 +11,14 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Install Hottest
+      uses: shell
+      run: |
+        go install github.com/nao1215/hottest@latest
+
     - run: bash $GITHUB_ACTION_PATH/entrypoint.sh ${{ inputs.args }}
       shell: bash
       env:
